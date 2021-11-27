@@ -6,18 +6,18 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 /*METODO CONSIGLIATO CON TEXTURE LOADER*/
 const loadingManager =
   new THREE.LoadingManager(); /*UTILIZZO UN LOADING MANAGER DA PASSARE NEL TEXTURE LOADER*/
-loadingManager.onStart = () => {
-  console.log("START");
-};
-loadingManager.onLoad = () => {
-  console.log("LOADING");
-};
-loadingManager.onProgress = () => {
-  console.log("PROGRESSING");
-};
-loadingManager.onError = () => {
-  console.log("ERROR");
-}; /*POSSO USARE QUESTE FUNZIONI DEL LOADING MANAGER PER DEBUGGARE IL CARICAMENTO E LO STATO DELLE TEXTURES*/
+// loadingManager.onStart = () => {
+//   console.log("START");
+// };
+// loadingManager.onLoad = () => {
+//   console.log("LOADING");
+// };
+// loadingManager.onProgress = () => {
+//   console.log("PROGRESSING");
+// };
+// loadingManager.onError = () => {
+//   console.log("ERROR");
+// }; /*POSSO USARE QUESTE FUNZIONI DEL LOADING MANAGER PER DEBUGGARE IL CARICAMENTO E LO STATO DELLE TEXTURES*/
 const textureLoader = new THREE.TextureLoader(
   loadingManager
 ); /*POSSO USARLO PER TUTTE LE TEXTURE NECESSARIE*/
