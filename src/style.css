@@ -1,0 +1,11 @@
+/*ELIMINA MARGINE BIANCO DI DEFAULT*/
+* {
+  margin: 0;
+  padding: 0;
+}
+/*ELIMINA SCROLL BAR*/
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
