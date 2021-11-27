@@ -1,21 +1,51 @@
 import "./style.css";
 import * as THREE from "three";
-import { Scene } from "three";
+import { LoadingManager, Scene } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 /*IMPORTO LE TEXTURE, SI UTILIZZANO NEI MATERIALI*/
-const image = new Image(); /*CREO UNA VARIABILE IMMAGINE VUOTA*/
-const texture = new THREE.Texture(image);
-image.onload = () => {
-  texture.needsUpdate = true;
+/*METODO CONSIGLIATO CON TEXTURE LOADER*/
+const loadingManager =
+  new THREE.LoadingManager(); /*UTILIZZO UN LOADING MANAGER DA PASSARE NEL TEXTURE LOADER*/
+loadingManager.onStart = () => {
+  console.log("START");
 };
-image.src = "/textures/door/color.jpg"; /*DICHIARO LA SORGENTE DELL'IMMAGINE*/
+loadingManager.onLoad = () => {
+  console.log("LOADING");
+};
+loadingManager.onProgress = () => {
+  console.log("PROGRESSING");
+};
+loadingManager.onError = () => {
+  console.log("ERROR");
+}; /*POSSO USARE QUESTE FUNZIONI DEL LOADING MANAGER PER DEBUGGARE IL CARICAMENTO E LO STATO DELLE TEXTURES*/
+const textureLoader = new THREE.TextureLoader(
+  loadingManager
+); /*POSSO USARLO PER TUTTE LE TEXTURE NECESSARIE*/
+const colorTexture = textureLoader.load(
+  "textures/door/color.jpg"
+); /*SI POSSONO AGGIUNGERE ALTRI TRE AROMENTI FUNZIONE PER ,*LOAD*,*PROGRESS*,*ERRORS**/
+const alphaTexture = textureLoader.load("textures/door/alpha.jpg");
+const heightTexture = textureLoader.load("textures/door/height.jpg");
+const ambientOcclusionTexture = textureLoader.load(
+  "textures/door/ambientOcclusion.jpg"
+);
+const metalnessTexture = textureLoader.load("textures/door/metalness.jpg");
+const roughnessTexture = textureLoader.load("textures/door/roughness.jpg");
+const normalTexture = textureLoader.load("textures/door/normal.jpg");
+
+// const image = new Image(); /*CREO UNA VARIABILE IMMAGINE VUOTA*/
+// const texture = new THREE.Texture(image);
+// image.onload = () => {
+//   texture.needsUpdate = true;
+// };
+// image.src = "/textures/door/color.jpg"; /*DICHIARO LA SORGENTE DELL'IMMAGINE*/
 
 /*CREARE LA SCENA PER PRIMA COSA*/
 const scene = new THREE.Scene();
 
 /*CREARE L'OGGETTO*/
 const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ map: texture });
+const material = new THREE.MeshBasicMaterial({ map: colorTexture });
 const mesh = new THREE.Mesh(
   geometry,
   material
